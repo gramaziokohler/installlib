@@ -77,7 +77,7 @@ class InstallToVirtualEnvironment:
             env = self.virtual_env() if callable(self.virtual_env) else self.virtual_env
             activate_cmd = env.activate
             # --quiet is important: if PIPE gets full the process will hang
-            install_cmd = ["python", "-m", "pip", "install", "--quiet", *self.package_names]
+            install_cmd = ["python", "-m", "pip", "install", "--quiet", "--force-reinstall", *self.package_names]
             start_command([activate_cmd, "&&", *install_cmd])
         except Exception as ex:
             return False, f"Failed to install package: {self.package_names} to virtual environment: {ex}"
