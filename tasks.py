@@ -196,3 +196,10 @@ def prepare_changelog(ctx):
 def test(ctx):
     """Run tests."""
     ctx.run("pytest")
+
+
+@invoke.task
+def docs(ctx):
+    """Build the documentation."""
+    with chdir(ctx.base_folder):
+        ctx.run("sphinx-build -b html docs docs/_build")

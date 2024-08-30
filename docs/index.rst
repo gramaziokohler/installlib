@@ -1,33 +1,17 @@
-********************************************************************************
-installlib
-********************************************************************************
+.. installlib documentation master file, created by
+   sphinx-quickstart on Fri Aug 30 17:23:14 2024.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
 
-.. rst-class:: lead
+installlib documentation
+========================
 
-Installlib is a small library which helps orchestrating arbitrary scripted tasks
+Add your content using ``reStructuredText`` syntax. See the
+`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
+documentation for details.
 
-.. .. figure:: /_images/
-     :figclass: figure
-     :class: figure-img img-fluid
-
-
-Table of Contents
-=================
 
 .. toctree::
-   :maxdepth: 3
-   :titlesonly:
+   :maxdepth: 2
+   :caption: Contents:
 
-   Introduction <self>
-   installation
-   tutorial
-   examples
-   api
-   license
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
