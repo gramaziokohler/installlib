@@ -1,4 +1,5 @@
 from typing import Any
+
 from progress.bar import ChargingBar
 
 
@@ -32,7 +33,6 @@ class Sequence:
         self._is_cancelled = True
 
 
-
 class Resource:
     RESOURCES = {}
 
@@ -51,4 +51,3 @@ class Resource:
 
 def rs(key):
     return Resource(key)
-

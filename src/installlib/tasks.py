@@ -103,7 +103,6 @@ class InstallOfflineWheel:
 
 
 class ReadValueFromRegistry:
-
     HIVES = {
         "HKEY_CLASSES_ROOT": winreg.HKEY_CLASSES_ROOT,
         "HKEY_CURRENT_USER": winreg.HKEY_CURRENT_USER,
@@ -111,7 +110,7 @@ class ReadValueFromRegistry:
         "HKEY_USERS": winreg.HKEY_USERS,
         "HKEY_PERFORMANCE_DATA": winreg.HKEY_PERFORMANCE_DATA,
         "HKEY_CURRENT_CONFIG": winreg.HKEY_CURRENT_CONFIG,
-        "HKEY_DYN_DATA": winreg.HKEY_DYN_DATA
+        "HKEY_DYN_DATA": winreg.HKEY_DYN_DATA,
     }
 
     def __init__(self, path, store_in, name=None) -> None:
