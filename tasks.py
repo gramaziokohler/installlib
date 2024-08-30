@@ -1,4 +1,4 @@
-"""Everything here is shamelessly copied from compas_invocations2"""
+"""Everything here is shamelessly copied from https://github.com/compas-dev/compas_invocations2"""
 
 import sys
 import glob
@@ -190,3 +190,9 @@ def prepare_changelog(ctx):
             changelog.write(content.replace("## ", UNRELEASED_CHANGELOG_TEMPLATE, 1))
 
         ctx.run('git add CHANGELOG.md && git commit -m "Prepare changelog for next release"')
+
+
+@invoke.task
+def test(ctx):
+    """Run tests."""
+    ctx.run("pytest")
