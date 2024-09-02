@@ -8,6 +8,8 @@ import contextlib
 
 import invoke
 
+HERE = os.path.dirname(__file__)
+
 
 # NOTE: originally taken from invocations https://github.com/pyinvoke/invocations/blob/main/invocations/console.py
 def confirm(question, assume_yes=True):
@@ -101,7 +103,7 @@ def format(ctx):
 def check(ctx):
     """Check the consistency of documentation, coding style and a few other things."""
 
-    with chdir(ctx.base_folder):
+    with chdir(HERE):
         lint(ctx)
 
 
@@ -115,9 +117,9 @@ def check(ctx):
 def clean(ctx, docs=True, bytecode=True, builds=True):
     """Cleans the local copy from compiled artifacts."""
 
-    with chdir(ctx.base_folder):
+    with chdir(HERE):
         if bytecode:
-            for root, dirs, files in os.walk(ctx.base_folder):
+            for root, dirs, files in os.walk(HERE):
                 for f in files:
                     if f.endswith(".pyc"):
                         os.remove(os.path.join(root, f))
@@ -140,7 +142,7 @@ def clean(ctx, docs=True, bytecode=True, builds=True):
             folders.extend(glob.glob("src/**/*.egg-info", recursive=False))
 
         for folder in folders:
-            shutil.rmtree(os.path.join(ctx.base_folder, folder), ignore_errors=True)
+            shutil.rmtree(os.path.join(HERE, folder), ignore_errors=True)
 
 
 @invoke.task(help={"release_type": "Type of release follows semver rules. Must be one of: major, minor, patch."})
@@ -182,7 +184,7 @@ def prepare_changelog(ctx):
     """Prepare changelog for next release."""
     UNRELEASED_CHANGELOG_TEMPLATE = "## Unreleased\n\n### Added\n\n### Changed\n\n### Removed\n\n\n## "
 
-    with chdir(ctx.base_folder):
+    with chdir(HERE):
         # Preparing changelog for next release
         with open("CHANGELOG.md", "r+") as changelog:
             content = changelog.read()
@@ -201,5 +203,5 @@ def test(ctx):
 @invoke.task
 def docs(ctx):
     """Build the documentation."""
-    with chdir(ctx.base_folder):
+    with chdir(HERE):
         ctx.run("sphinx-build -b html docs docs/_build")
