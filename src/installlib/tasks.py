@@ -10,6 +10,21 @@ from .flow import Resource
 
 
 class PipInstallPackage:
+    """Use pip install a package from PyPI.
+
+    Parameters
+    ----------
+    package_name : str
+        The name of the package to install.
+    version : str, optional
+        The version of the package to install.
+    python : str, optional
+        The path to the python interpreter to use. Default is sys.executable.
+    args : tuple
+        Additional arguments to pass to pip install.
+
+    """
+
     def __init__(self, package_name, *args, version=None, python=sys.executable, name=None) -> None:
         self.name = name or PipInstallPackage.__name__
         self.package_name = package_name
