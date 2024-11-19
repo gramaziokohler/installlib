@@ -183,3 +183,20 @@ class CopyFiles:
         except Exception as ex:
             return False, f"Failed to copy files: {ex}"
         return True, None
+
+
+class DeleteFiles:
+    def __init__(self, filepaths, name=None) -> None:
+        self.name = name or DeleteFiles.__name__
+        self.filepaths = filepaths
+
+    def execute(self):
+        try:
+            files = self.filepaths() if callable(self.filepaths) else self.filepaths
+            if not isinstance(files, list):
+                files = [files]
+            for file in files:
+                os.remove(file)
+        except Exception as ex:
+            return False, f"Failed to delete files: {ex}"
+        return True, None
