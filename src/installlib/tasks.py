@@ -186,17 +186,24 @@ class CopyFiles:
 
 
 class DeleteFiles:
-    def __init__(self, filepaths, name=None) -> None:
+    def __init__(self, filepaths, fail_on_doesnt_exist=True, name=None) -> None:
         self.name = name or DeleteFiles.__name__
         self.filepaths = filepaths
+        self._fail_on_doesnt_exist = fail_on_doesnt_exist
 
     def execute(self):
         try:
             files = self.filepaths() if callable(self.filepaths) else self.filepaths
+
             if not isinstance(files, list):
                 files = [files]
+
             for file in files:
-                os.remove(file)
+                try:
+                    os.remove(file)
+                except FileNotFoundError:
+                    if self._fail_on_doesnt_exist:
+                        return False, f"File not found: {file}"
         except Exception as ex:
             return False, f"Failed to delete files: {ex}"
         return True, None
