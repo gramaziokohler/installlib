@@ -1,5 +1,3 @@
-import pytest
-
 from installlib.tasks import InstallOfflineWheel
 
 
