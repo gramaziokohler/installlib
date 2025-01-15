@@ -100,17 +100,20 @@ class InstallToVirtualEnvironment:
 
 
 class InstallOfflineWheel:
-    def __init__(self, path, virtual_env, name=None) -> None:
+    def __init__(self, path, virtual_env, name=None, args=None) -> None:
         self.name = name or InstallOfflineWheel.__name__
         self.path = path
         self.virtual_env = virtual_env
+        self.args = args or []
 
     def execute(self):
         try:
             env = self.virtual_env() if callable(self.virtual_env) else self.virtual_env
             activate_cmd = env.activate
             # --quiet is important: if PIPE gets full the process will hang
-            install_cmd = ["python", "-m", "pip", "install", "--quiet", self.path]
+            install_cmd = ["python", "-m", "pip", "install", "--quiet"]
+            install_cmd += self.args
+            install_cmd += [self.path]
             start_command([activate_cmd, "&&", *install_cmd])
         except Exception as ex:
             return False, f"Failed to install wheel: {self.path} to virtual environment: {ex}"
